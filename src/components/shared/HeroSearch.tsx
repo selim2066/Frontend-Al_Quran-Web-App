@@ -25,7 +25,7 @@ export function HeroSearch() {
     queryFn: async () => {
       if (query.length < 3) return [];
       const res = await fetch(
-        `https://api.quran.com/api/v4/search?q=${query}&language=en&size=5`,
+        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/api/search?q=${encodeURIComponent(query)}`,
       );
       const data = await res.json();
       return data.search.results || [];
@@ -178,7 +178,7 @@ export function HeroSearch() {
                         )}
                       >
                         {result.type === "surah"
-                          ? result.data.translated_name.name
+                          ? result.data.translated_name
                           : result.data.text.replace(/<[^>]*>?/gm, "")}
                       </p>
                     </div>

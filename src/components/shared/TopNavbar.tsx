@@ -1,13 +1,22 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { SearchDialog } from "@/features/search/components/SearchDialog";
-import { Settings, Sun, Moon, Heart, ChevronDown, BookOpen, Menu, X, Search } from "lucide-react";
-import { useTheme } from "next-themes";
-import { toast } from "sonner";
-import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import {
+  BookOpen,
+  Heart,
+  Menu,
+  Moon,
+  Search,
+  Settings,
+  Sun,
+  X,
+} from "lucide-react";
+import { useTheme } from "next-themes";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 interface TopNavbarProps {
   onOpenSettings?: () => void;
@@ -15,7 +24,11 @@ interface TopNavbarProps {
   isReadingView?: boolean;
 }
 
-export function TopNavbar({ onOpenSettings, onOpenSurahs, isReadingView }: TopNavbarProps) {
+export function TopNavbar({
+  onOpenSettings,
+  onOpenSurahs,
+  isReadingView,
+}: TopNavbarProps) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,28 +49,34 @@ export function TopNavbar({ onOpenSettings, onOpenSurahs, isReadingView }: TopNa
         {/* Mobile Reading View: Hamburger left, Title center, Icons right */}
         {isReadingView && (
           <div className="flex md:hidden items-center justify-between w-full">
-            <button 
+            <button
               onClick={onOpenSurahs}
               className="p-2 text-foreground/60 hover:text-primary transition-all"
             >
               <Menu size={24} />
             </button>
-            
+
             <h1 className="text-lg font-bold font-serif text-foreground">
               Quran Mazid
             </h1>
 
             <div className="flex items-center gap-1">
-              <SearchDialog trigger={
-                <button className="p-2 text-foreground/60 hover:text-primary transition-all">
-                  <Search size={20} />
-                </button>
-              } />
+              <SearchDialog
+                trigger={
+                  <button className="p-2 text-foreground/60 hover:text-primary transition-all">
+                    <Search size={20} />
+                  </button>
+                }
+              />
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                 className="p-2 text-foreground/60 hover:text-primary transition-all"
               >
-                {mounted && theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+                {mounted && theme === "dark" ? (
+                  <Sun size={20} />
+                ) : (
+                  <Moon size={20} />
+                )}
               </button>
               <button
                 onClick={onOpenSettings}
@@ -70,17 +89,19 @@ export function TopNavbar({ onOpenSettings, onOpenSurahs, isReadingView }: TopNa
         )}
 
         {/* Desktop and Normal Mobile View */}
-        <div className={cn(
-          "flex items-center justify-between w-full",
-          isReadingView ? "hidden md:flex" : "flex"
-        )}>
+        <div
+          className={cn(
+            "flex items-center justify-between w-full",
+            isReadingView ? "hidden md:flex" : "flex",
+          )}
+        >
           {/* Logo and Title */}
           <div className="flex items-center gap-3">
             {/* The Icon Container */}
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary shadow-lg shadow-primary/20">
               <BookOpen className="h-7 w-7 text-white" />
             </div>
-            
+
             {/* The Text Column */}
             <div className="hidden sm:block">
               <h1 className="text-xl font-bold font-serif tracking-tight text-foreground">
@@ -100,14 +121,26 @@ export function TopNavbar({ onOpenSettings, onOpenSurahs, isReadingView }: TopNa
                 href={link.href}
                 className={cn(
                   "text-sm font-bold transition-all whitespace-nowrap",
-                  pathname === link.href ? "text-primary" : "text-foreground/60 hover:text-primary"
+                  pathname === link.href
+                    ? "text-primary"
+                    : "text-foreground/60 hover:text-primary",
                 )}
               >
                 {link.label}
               </Link>
             ))}
-            <Link href="/not-found" className="text-sm font-bold text-foreground/60 hover:text-primary whitespace-nowrap">Recitation</Link>
-            <Link href="/not-found" className="text-sm font-bold text-foreground/60 hover:text-primary whitespace-nowrap">Translation</Link>
+            <Link
+              href="/not-found"
+              className="text-sm font-bold text-foreground/60 hover:text-primary whitespace-nowrap"
+            >
+              Recitation
+            </Link>
+            <Link
+              href="/not-found"
+              className="text-sm font-bold text-foreground/60 hover:text-primary whitespace-nowrap"
+            >
+              Translation
+            </Link>
           </nav>
 
           {/* Actions */}
@@ -117,7 +150,11 @@ export function TopNavbar({ onOpenSettings, onOpenSurahs, isReadingView }: TopNa
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                 className="p-2 rounded-full text-foreground/60 hover:text-primary transition-all"
               >
-                {mounted && theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+                {mounted && theme === "dark" ? (
+                  <Sun size={20} />
+                ) : (
+                  <Moon size={20} />
+                )}
               </button>
 
               <button
@@ -138,7 +175,7 @@ export function TopNavbar({ onOpenSettings, onOpenSurahs, isReadingView }: TopNa
 
             {/* Mobile Menu Trigger (Non-Reading View) */}
             {!isReadingView && (
-              <button 
+              <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="md:hidden p-2 text-foreground/60 hover:text-primary transition-all"
               >
@@ -150,14 +187,20 @@ export function TopNavbar({ onOpenSettings, onOpenSurahs, isReadingView }: TopNa
       </div>
 
       {/* Mobile Drawer */}
-      <div className={cn(
-        "fixed inset-0 top-20 z-50 md:hidden bg-background/80 backdrop-blur-md transition-all duration-300",
-        isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-      )}>
-        <div className={cn(
-          "bg-card border-b border-border p-6 space-y-6 transition-transform duration-300 transform",
-          isMenuOpen ? "translate-y-0" : "-translate-y-full"
-        )}>
+      <div
+        className={cn(
+          "fixed inset-0 top-20 z-50 md:hidden bg-background/80 backdrop-blur-md transition-all duration-300",
+          isMenuOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none",
+        )}
+      >
+        <div
+          className={cn(
+            "bg-card border-b border-border p-6 space-y-6 transition-transform duration-300 transform",
+            isMenuOpen ? "translate-y-0" : "-translate-y-full",
+          )}
+        >
           <nav className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <Link
@@ -166,27 +209,41 @@ export function TopNavbar({ onOpenSettings, onOpenSurahs, isReadingView }: TopNa
                 onClick={() => setIsMenuOpen(false)}
                 className={cn(
                   "text-lg font-bold p-2 rounded-xl transition-all",
-                  pathname === link.href ? "bg-primary/10 text-primary" : "text-foreground/60 hover:bg-secondary"
+                  pathname === link.href
+                    ? "bg-primary/10 text-primary"
+                    : "text-foreground/60 hover:bg-secondary",
                 )}
               >
                 {link.label}
               </Link>
             ))}
-            <Link href="/not-found" onClick={() => setIsMenuOpen(false)} className="text-lg font-bold p-2 rounded-xl text-foreground/60 hover:bg-secondary">Recitation</Link>
-            <Link href="/not-found" onClick={() => setIsMenuOpen(false)} className="text-lg font-bold p-2 rounded-xl text-foreground/60 hover:bg-secondary">Translation</Link>
+            <Link
+              href="/not-found"
+              onClick={() => setIsMenuOpen(false)}
+              className="text-lg font-bold p-2 rounded-xl text-foreground/60 hover:bg-secondary"
+            >
+              Recitation
+            </Link>
+            <Link
+              href="/not-found"
+              onClick={() => setIsMenuOpen(false)}
+              className="text-lg font-bold p-2 rounded-xl text-foreground/60 hover:bg-secondary"
+            >
+              Translation
+            </Link>
           </nav>
 
           <div className="pt-6 border-t border-border space-y-4">
-             <div className="flex items-center justify-between p-2">
-                <span className="font-bold text-foreground/60">Theme</span>
-                <button
-                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                  className="p-2 bg-secondary rounded-xl text-primary"
-                >
-                  {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-                </button>
-             </div>
-             <button
+            <div className="flex items-center justify-between p-2">
+              <span className="font-bold text-foreground/60">Theme</span>
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="p-2 bg-secondary rounded-xl text-primary"
+              >
+                {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+              </button>
+            </div>
+            <button
               onClick={() => {
                 setIsMenuOpen(false);
                 toast("Support us coming soon");
