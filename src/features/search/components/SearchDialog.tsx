@@ -1,18 +1,17 @@
 "use client";
-
-import React, { useEffect, useState } from "react";
+import { searchAyahs } from "../../surah/services/quranApi";
 import {
   CommandDialog,
-  CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import { Search, BookOpen, Book } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
-import { fetchSurahs } from "../../surah/services/quranApi";
 import { useQuranStore } from "@/store/useQuranStore";
+import { useQuery } from "@tanstack/react-query";
+import { BookOpen, Search } from "lucide-react";
+import React, { useEffect, useState } from "react";
+//import { fetchSurahs } from "../../surah/services/quranApi";
 
 interface SearchDialogProps {
   trigger?: React.ReactNode;
@@ -25,14 +24,19 @@ export function SearchDialog({ trigger }: SearchDialogProps) {
 
   const { data: surahs } = useQuery({
     queryKey: ["surahs"],
-    queryFn: fetchSurahs,
+    queryFn: async () => {
+  if (query.length < 3) return null;
+  return await searchAyahs(query);
+},
   });
 
   const { data: searchResults, isLoading: isSearching } = useQuery({
     queryKey: ["search", query],
     queryFn: async () => {
       if (query.length < 3) return null;
-      const res = await fetch(`https://api.quran.com/api/v4/search?q=${query}&language=en&size=10`);
+      const res = await fetch(
+        `https://api.quran.com/api/v4/search?q=${query}&language=en&size=10`,
+      );
       const data = await res.json();
       return data.search.results;
     },
@@ -57,7 +61,7 @@ export function SearchDialog({ trigger }: SearchDialogProps) {
           {trigger}
         </div>
       ) : (
-        <button 
+        <button
           onClick={() => setOpen(true)}
           className="flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground border border-border rounded-full hover:bg-secondary/50 transition-all w-full max-w-[200px]"
         >
@@ -70,16 +74,16 @@ export function SearchDialog({ trigger }: SearchDialogProps) {
       )}
 
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput 
-          placeholder="Search Surahs or Ayahs..." 
+        <CommandInput
+          placeholder="Search Surahs or Ayahs..."
           value={query}
           onValueChange={setQuery}
         />
         <CommandList>
           {query.length < 3 ? (
             <CommandGroup heading="Surahs">
-              {surahs?.map((surah) => (
-                <CommandItem 
+              {surahs?.map((surah: any) => (
+                <CommandItem
                   key={surah.id}
                   onSelect={() => {
                     setSelectedSurah(surah.id);
@@ -88,15 +92,21 @@ export function SearchDialog({ trigger }: SearchDialogProps) {
                 >
                   <BookOpen className="mr-2 h-4 w-4" />
                   <span>{surah.name_complex}</span>
-                  <span className="ml-auto text-xs text-muted-foreground">{surah.translated_name.name}</span>
+                  <span className="ml-auto text-xs text-muted-foreground">
+                    {surah.translated_name}
+                  </span>
                 </CommandItem>
               ))}
             </CommandGroup>
           ) : (
             <CommandGroup heading="Search Results">
-              {isSearching && <div className="p-4 text-center text-sm text-muted-foreground">Searching...</div>}
+              {isSearching && (
+                <div className="p-4 text-center text-sm text-muted-foreground">
+                  Searching...
+                </div>
+              )}
               {searchResults?.map((result: any) => (
-                <CommandItem 
+                <CommandItem
                   key={result.verse_id}
                   onSelect={() => {
                     const [sId] = result.verse_key.split(":");
@@ -107,13 +117,20 @@ export function SearchDialog({ trigger }: SearchDialogProps) {
                 >
                   <Search className="mr-2 h-4 w-4" />
                   <div className="flex flex-col">
-                    <span className="text-sm line-clamp-1" dangerouslySetInnerHTML={{ __html: result.text }} />
-                    <span className="text-[10px] text-muted-foreground">Surah {result.verse_key}</span>
+                    <span
+                      className="text-sm line-clamp-1"
+                      dangerouslySetInnerHTML={{ __html: result.text }}
+                    />
+                    <span className="text-[10px] text-muted-foreground">
+                      Surah {result.verse_key}
+                    </span>
                   </div>
                 </CommandItem>
               ))}
               {!isSearching && searchResults?.length === 0 && (
-                <div className="p-4 text-center text-sm text-muted-foreground">No results found.</div>
+                <div className="p-4 text-center text-sm text-muted-foreground">
+                  No results found.
+                </div>
               )}
             </CommandGroup>
           )}

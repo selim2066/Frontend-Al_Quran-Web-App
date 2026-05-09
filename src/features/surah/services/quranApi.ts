@@ -34,9 +34,7 @@ export async function fetchAyahs(surahId: number): Promise<Ayah[]> {
 }
 
 export async function searchAyahs(query: string) {
-  const res = await fetch(
-    `${BASE_URL}/api/search?q=${encodeURIComponent(query)}`,
-  );
+  const res = await fetch(`${BASE_URL}/api/search?q=${encodeURIComponent(query)}`);
   const data = await res.json();
   return data.search.results;
 }
