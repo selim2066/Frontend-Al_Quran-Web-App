@@ -240,7 +240,11 @@ export function TopNavbar({
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                 className="p-2 bg-secondary rounded-xl text-primary"
               >
-                {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+                {mounted && theme === "dark" ? (
+                  <Sun size={20} />
+                ) : (
+                  <Moon size={20} />
+                )}
               </button>
             </div>
             <button

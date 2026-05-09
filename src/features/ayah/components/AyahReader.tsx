@@ -18,6 +18,12 @@ import { fetchAyahs, fetchSurahs } from "../../surah/services/quranApi";
 
 import { toast } from "sonner";
 
+function sanitizeTranslation(html: string): string {
+  return html
+    .replace(/<script[^>]*>.*?<\/script>/gi, "")
+    .replace(/<[^>]*>/g, "");
+}
+
 export function AyahReader() {
   const {
     selectedSurah,
@@ -181,7 +187,9 @@ export function AyahReader() {
                 style={{ fontSize: `${fontSizeTranslation}px` }}
                 className="text-foreground/90 leading-relaxed font-medium"
                 dangerouslySetInnerHTML={{
-                  __html: ayah.translation_text || "Translation not available",
+                  __html: sanitizeTranslation(
+                    ayah.translation_text || "Translation not available",
+                  ),
                 }}
               />
             </div>
