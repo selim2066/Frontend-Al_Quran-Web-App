@@ -48,9 +48,9 @@ export function HeroSearch() {
     ...(ayahResults?.map((a: any) => ({ type: "ayah", data: a })) || []),
   ];
 
-  useEffect(() => {
-    setSelectedIndex(0);
-  }, [query]);
+  // useEffect(() => {
+  //   setSelectedIndex(0);
+  // }, [query]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -104,6 +104,7 @@ export function HeroSearch() {
             onChange={(e) => {
               setQuery(e.target.value);
               setIsOpen(true);
+              setSelectedIndex(0);
             }}
             onFocus={() => setIsOpen(true)}
             onKeyDown={onKeyDown}
@@ -179,7 +180,10 @@ export function HeroSearch() {
                       >
                         {result.type === "surah"
                           ? result.data.translated_name
-                          : result.data.text.replace(/<[^>]*>?/gm, "")}
+                          : result.data.translation_text.replace(
+                              /<[^>]*>?/gm,
+                              "",
+                            )}
                       </p>
                     </div>
 
