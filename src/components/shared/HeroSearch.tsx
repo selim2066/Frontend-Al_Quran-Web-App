@@ -178,7 +178,7 @@ export function HeroSearch() {
                         )}
                       >
                         {result.type === "surah"
-                          ? result.data.translated_name
+                          ? result.data.translated_name.name
                           : result.data.text.replace(/<[^>]*>?/gm, "")}
                       </p>
                     </div>

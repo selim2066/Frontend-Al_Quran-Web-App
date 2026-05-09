@@ -1,13 +1,20 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { Play, Bookmark, Share2, MoreHorizontal, Copy, BookOpen } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  Bookmark,
+  BookOpen,
+  Copy,
+  MoreHorizontal,
+  Play,
+  Share2,
+} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
+import { useQuranStore } from "@/store/useQuranStore";
 import { useQuery } from "@tanstack/react-query";
 import { fetchAyahs, fetchSurahs } from "../../surah/services/quranApi";
-import { useQuranStore } from "@/store/useQuranStore";
 
 import { toast } from "sonner";
 
@@ -18,7 +25,7 @@ export function AyahReader() {
     fontSizeTranslation,
     arabicFont,
     currentAyah,
-    setCurrentAyah
+    setCurrentAyah,
   } = useQuranStore();
   const containerRef = useRef<HTMLDivElement>(null);
   const [openMenuAyah, setOpenMenuAyah] = useState<string | null>(null);
@@ -26,7 +33,11 @@ export function AyahReader() {
   const menuItems = [
     { label: "Play", icon: Play, action: (key: string) => setCurrentAyah(key) },
     { label: "Tafsir", icon: BookOpen, action: () => handleAction("Tafsir") },
-    { label: "Bookmark", icon: Bookmark, action: () => handleAction("Bookmark") },
+    {
+      label: "Bookmark",
+      icon: Bookmark,
+      action: () => handleAction("Bookmark"),
+    },
     { label: "Ayah Copy", icon: Copy, action: () => handleAction("Copy") },
     { label: "Copy Link", icon: Share2, action: () => handleAction("Link") },
     { label: "Ayah Share", icon: Share2, action: () => handleAction("Share") },
@@ -37,7 +48,7 @@ export function AyahReader() {
     queryFn: fetchSurahs,
   });
 
-  const currentSurah = surahs?.find(s => s.id === selectedSurah);
+  const currentSurah = surahs?.find((s) => s.id === selectedSurah);
 
   const { data: ayahs, isLoading } = useQuery({
     queryKey: ["ayahs", selectedSurah],
@@ -68,7 +79,10 @@ export function AyahReader() {
         <div className="h-40 bg-secondary/20 rounded-3xl animate-pulse" />
         <div className="space-y-8">
           {[...Array(5)].map((_, i) => (
-            <div key={i} className="h-64 bg-secondary/10 rounded-2xl animate-pulse" />
+            <div
+              key={i}
+              className="h-64 bg-secondary/10 rounded-2xl animate-pulse"
+            />
           ))}
         </div>
       </div>
@@ -96,7 +110,8 @@ export function AyahReader() {
             {currentSurah?.name_complex}
           </h2>
           <div className="text-sm text-muted-foreground font-medium">
-            {currentSurah?.name_arabic} • {currentSurah?.verses_count} Ayahs, {currentSurah?.revelation_place}
+            {currentSurah?.name_arabic} • {currentSurah?.verses_count} Ayahs,{" "}
+            {currentSurah?.revelation_place}
           </div>
         </div>
       </motion.div>
@@ -108,12 +123,14 @@ export function AyahReader() {
             id={`ayah-${ayah.verse_key}`}
             className={cn(
               "py-8 px-4 space-y-5 transition-all duration-500 border-b border-border/10",
-              currentAyah === ayah.verse_key && "bg-primary/[0.03] rounded-xl"
+              currentAyah === ayah.verse_key && "bg-primary/[0.03] rounded-xl",
             )}
           >
             {/* Row 1: Ayah number + actions + three dot */}
             <div className="flex items-center justify-between">
-              <span className="text-sm font-bold text-primary">{ayah.verse_key}</span>
+              <span className="text-sm font-bold text-primary">
+                {ayah.verse_key}
+              </span>
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setCurrentAyah(ayah.verse_key)}
@@ -146,7 +163,10 @@ export function AyahReader() {
             <div className="text-right">
               <p
                 style={{ fontSize: `${fontSizeArabic}px` }}
-                className={cn("leading-[2.8] text-foreground font-medium", arabicFont)}
+                className={cn(
+                  "leading-[2.8] text-foreground font-medium",
+                  arabicFont,
+                )}
               >
                 {ayah.text_madani}
               </p>
@@ -155,12 +175,14 @@ export function AyahReader() {
             {/* Row 3: Translation */}
             <div className="space-y-2">
               <p className="text-[10px] font-bold text-muted-foreground tracking-[0.2em] uppercase">
-                {ayah.translations?.[0]?.resource_name || "Saheeh International"}
+                {ayah.translation_source || "Saheeh International"}
               </p>
               <p
                 style={{ fontSize: `${fontSizeTranslation}px` }}
                 className="text-foreground/90 leading-relaxed font-medium"
-                dangerouslySetInnerHTML={{ __html: ayah.translations?.[0]?.text || "Translation not available" }}
+                dangerouslySetInnerHTML={{
+                  __html: ayah.translation_text || "Translation not available",
+                }}
               />
             </div>
           </motion.article>

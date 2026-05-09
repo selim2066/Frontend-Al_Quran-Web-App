@@ -77,16 +77,16 @@ export function HeroSection() {
                 className="text-center space-y-6 max-w-4xl"
               >
                 <p className="text-3xl md:text-5xl font-scheherazade text-foreground leading-relaxed line-clamp-2">
-                  {slides[currentSlide].text_madani}
-                </p>
-                <div className="space-y-2">
-                  <p className="text-sm md:text-base text-muted-foreground font-medium italic line-clamp-1">
-                    "{slides[currentSlide].translations[0].text.replace(/<[^>]*>?/gm, '')}"
-                  </p>
-                  <p className="text-[10px] font-bold text-primary uppercase tracking-[0.3em]">
-                    {slides[currentSlide].surahName} • {slides[currentSlide].verse_key}
-                  </p>
-                </div>
+  {slides[currentSlide].text_madani}
+</p>
+<div className="space-y-2">
+  <p className="text-sm md:text-base text-muted-foreground font-medium italic line-clamp-1">
+    "{slides[currentSlide].translation_text?.replace(/<[^>]*>?/gm, '') || ""}"
+  </p>
+  <p className="text-[10px] font-bold text-primary uppercase tracking-[0.3em]">
+    {slides[currentSlide].surahName} • {slides[currentSlide].verse_key}
+  </p>
+</div>
               </motion.div>
             ) : (
               <div className="h-24 w-64 bg-primary/5 rounded-full animate-pulse" />
