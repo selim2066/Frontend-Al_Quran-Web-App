@@ -102,12 +102,12 @@ function MosqueBackground() {
           <stop offset="100%" stopColor="#000000" stopOpacity="0"/>
         </radialGradient>
         {/* Islamic 8-point star pattern */}
-        <pattern id="islamicPattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+        {/* <pattern id="islamicPattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
           <g opacity="0.07" fill="none" stroke="currentColor" strokeWidth="0.5">
             <polygon points="30,5 35,22 52,22 39,32 44,49 30,39 16,49 21,32 8,22 25,22"/>
             <circle cx="30" cy="30" r="12"/>
           </g>
-        </pattern>
+        </pattern> */}
       </defs>
 
       {/* Pattern overlay */}
