@@ -44,8 +44,7 @@
 //   ];
 
 //   return (
-//     <header className="sticky py-3 top-0 z-40 w-full bg-background border-b border-border/10">
-//       <div className="container max-w-7xl mx-auto h-16 flex items-center justify-between px-4">
+//     <header className="sticky py-3 top-0 z-40 w-full bg-green-50/80 dark:bg-background/80 backdrop-blur-md border-b border-green-100/60 dark:border-border/10">//       <div className="container max-w-7xl mx-auto h-16 flex items-center justify-between px-4">
 //         {/* Mobile Reading View: Hamburger left, Title center, Icons right */}
 //         {isReadingView && (
 //           <div className="flex md:hidden items-center justify-between w-full">
@@ -306,12 +305,11 @@ export function TopNavbar({
 
   const navLinks = [
     { label: "Home", href: "/" },
-    { label: "Surah", href: "/surah/1" },
+    { label: "Read Quran", href: "/surah/1" },
   ];
 
   return (
-    <header className="sticky py-3 top-0 z-40 w-full bg-background border-b border-border/10">
-      <div className="container max-w-7xl mx-auto h-16 flex items-center justify-between px-4">
+    <header className="sticky py-1 top-0 z-40 w-full bg-green-50/80 dark:bg-background/80 backdrop-blur-md border-b border-green-100/60 dark:border-border/10">      <div className="container max-w-7xl mx-auto h-16 flex items-center justify-between px-4">
         {/* Mobile Reading View: Hamburger left, Title center, Icons right */}
         {isReadingView && (
           <div className="flex md:hidden items-center justify-between w-full">
@@ -370,7 +368,7 @@ export function TopNavbar({
               <h1 className="text-xl font-bold font-serif tracking-tight text-foreground">
                 Quran Mazid
               </h1>
-              <p className="text-[9px] uppercase tracking-[0.2em] text-muted-foreground font-bold">
+              <p className="text-[8px] uppercase tracking-[0.2em] text-muted-foreground font-bold">
                 Read, Study, and Learn The Quran
               </p>
             </div>
@@ -396,13 +394,13 @@ export function TopNavbar({
               href="/not-found"
               className="text-sm font-bold text-foreground/60 hover:text-primary whitespace-nowrap"
             >
-              Recitation
+              Prayer Times
             </Link>
             <Link
               href="/not-found"
               className="text-sm font-bold text-foreground/60 hover:text-primary whitespace-nowrap"
             >
-              Translation
+              Ramadan 2026
             </Link>
           </nav>
 
@@ -493,14 +491,14 @@ export function TopNavbar({
               onClick={() => setIsMenuOpen(false)}
               className="text-lg font-bold p-2 rounded-xl text-foreground/60 hover:bg-secondary"
             >
-              Recitation
+              Prayer Times
             </Link>
             <Link
               href="/not-found"
               onClick={() => setIsMenuOpen(false)}
               className="text-lg font-bold p-2 rounded-xl text-foreground/60 hover:bg-secondary"
             >
-              Translation
+              Ramadan 2026
             </Link>
           </nav>
 
