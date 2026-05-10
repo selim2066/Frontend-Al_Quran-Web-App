@@ -217,7 +217,7 @@ export function HeroSection() {
           <HeroSearch />
           <div className="flex flex-wrap items-center justify-center gap-2">
             <span className="text-[10px] font-bold text-green-700/50 dark:text-muted-foreground uppercase tracking-widest mr-1">
-              Quick Links:
+            
             </span>
             {QUICK_LINKS.map((link) => (
               <Link
