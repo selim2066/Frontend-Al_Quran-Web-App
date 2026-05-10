@@ -91,7 +91,7 @@ export function HeroSearch() {
   };
 
   return (
-    <div className="relative w-full max-w-2xl mx-auto" ref={containerRef}>
+    <div className="relative w-full max-w-2xl mx-auto z-[999]" ref={containerRef}>
       <div className="relative group">
         <div className="absolute inset-0 bg-primary/20 blur-2xl group-focus-within:bg-primary/30 transition-all rounded-full" />
         <div className="relative flex items-center bg-card/80 backdrop-blur-xl border border-border/50 rounded-3xl p-2 pl-6 shadow-2xl focus-within:border-primary/50 transition-all">
@@ -121,7 +121,7 @@ export function HeroSearch() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="absolute top-full left-0 right-0 mt-4 bg-card/95 backdrop-blur-2xl border border-border/50 rounded-3xl shadow-3xl overflow-hidden z-50 max-h-[400px] overflow-y-auto custom-scrollbar"
+            className="absolute top-full left-0 right-0 mt-4 bg-card/95 backdrop-blur-2xl border border-border/50 rounded-3xl shadow-3xl overflow-hidden z-[999] max-h-[400px] overflow-y-auto custom-scrollbar"
           >
             {results.length > 0 ? (
               <div className="p-2">
