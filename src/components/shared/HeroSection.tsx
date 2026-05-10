@@ -351,22 +351,24 @@ export function HeroSection() {
       <div className="container mx-auto px-6 relative z-20 space-y-10">
 
         {/* Main heading */}
-        <div className="text-center space-y-3">
-          <p className="text-[10px] font-bold tracking-[0.4em] uppercase text-emerald-600 dark:text-emerald-400">
-            ﷽
-          </p>
-          <h1 className="text-5xl md:text-7xl font-serif font-bold tracking-[0.15em] text-emerald-950 dark:text-white uppercase drop-shadow-sm">
-            Quran Mazid
-          </h1>
-          <div className="flex items-center justify-center gap-3">
-            <div className="h-px w-20 bg-gradient-to-r from-transparent to-emerald-400 dark:to-emerald-600"/>
-            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"/>
-            <div className="h-px w-20 bg-gradient-to-l from-transparent to-emerald-400 dark:to-emerald-600"/>
-          </div>
-          <p className="text-xs tracking-[0.25em] uppercase text-emerald-700/60 dark:text-emerald-400/50 font-medium">
-            Read · Study · Learn
-          </p>
-        </div>
+     <div className="text-center space-y-3">
+  {/* <img
+    src="/arabic.png"
+    alt="Bismillah ir-Rahman ir-Rahim"
+    className="hidden dark:inline-block w-24 h-auto"
+  /> */}
+  <h1 className="text-5xl md:text-7xl font-serif font-bold tracking-[0.15em] text-emerald-950 dark:text-white uppercase drop-shadow-sm">
+    Quran Mazid
+  </h1>
+  <div className="flex items-center justify-center gap-3">
+    <div className="h-px w-20 bg-gradient-to-r from-transparent to-emerald-400 dark:to-emerald-600"/>
+    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"/>
+    <div className="h-px w-20 bg-gradient-to-l from-transparent to-emerald-400 dark:to-emerald-600"/>
+  </div>
+  <p className="text-xs tracking-[0.25em] uppercase text-emerald-700/60 dark:text-emerald-400/50 font-medium">
+    Read · Study · Learn
+  </p>
+</div>
 
         {/* Ayah Slider */}
         <div

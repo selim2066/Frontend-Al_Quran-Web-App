@@ -262,7 +262,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="container max-w-7xl mx-auto px-6 lg:px-0 py-6  flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-[11.5px] text-gray-500/70 dark:text-gray-500/60">
-            © 2026 Quran Mazid · IRD Foundation. All rights reserved.
+            © 2026 Quran Mazid · MSR. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             {["Terms", "Privacy", "Cookies"].map((item) => (
