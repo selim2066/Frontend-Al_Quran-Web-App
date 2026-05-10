@@ -45,6 +45,14 @@ export function AudioPlayer() {
     ? getAyahAudioUrl(currentAyah)
     : "";
 
+  // Step 1 — scroll to ayah in DOM
+  const scrollToAyah = (verseKey: string) => {
+    const el = document.getElementById(`ayah-${verseKey}`);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
   // Activate when ayah is selected
   useEffect(() => {
     if (currentAyah) {
@@ -90,7 +98,9 @@ export function AudioPlayer() {
     if (!ayahs || !currentAyah) return;
     const idx = ayahs.findIndex(a => a.verse_key === currentAyah);
     if (idx !== -1 && idx < ayahs.length - 1) {
-      setCurrentAyah(ayahs[idx + 1].verse_key);
+      const nextVerse = ayahs[idx + 1].verse_key;
+      setCurrentAyah(nextVerse);
+      scrollToAyah(nextVerse);
     }
   };
 
@@ -98,7 +108,9 @@ export function AudioPlayer() {
     if (!ayahs || !currentAyah) return;
     const idx = ayahs.findIndex(a => a.verse_key === currentAyah);
     if (idx > 0) {
-      setCurrentAyah(ayahs[idx - 1].verse_key);
+      const prevVerse = ayahs[idx - 1].verse_key;
+      setCurrentAyah(prevVerse);
+      scrollToAyah(prevVerse);
     }
   };
 
@@ -151,52 +163,52 @@ export function AudioPlayer() {
           className="fixed bottom-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-2xl border-t border-border shadow-[0_-20px_50px_rgba(0,0,0,0.2)]"
         >
 
-         {/* ── MOBILE BAR ── */}
-<div className="lg:hidden px-4 py-3 flex items-center gap-3">
-  <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary font-bold text-sm shrink-0">
-    {isSurahMode ? <Music size={18}/> : (ayahNumber || selectedSurah)}
-  </div>
-  <div className="flex-1 min-w-0">
-    <p className="text-sm font-bold text-foreground truncate">
-      {isSurahMode
-        ? `Full Surah — ${currentSurah?.name_complex}`
-        : currentAyah ? `Ayah ${currentAyah}` : currentSurah?.name_complex}
-    </p>
-    <p className="text-[10px] text-muted-foreground uppercase tracking-widest truncate">
-      {currentSurah?.name_arabic}
-    </p>
-  </div>
-  <div className="flex items-center gap-1 shrink-0">
-    <button
-      onClick={playSurah}
-      className={`p-2 transition-colors ${
-        isSurahMode ? "text-primary" : "text-muted-foreground hover:text-primary"
-      }`}
-    >
-      <Music size={18}/>
-    </button>
-    <button onClick={skipBack} className="text-muted-foreground hover:text-primary transition-colors p-2">
-      <SkipBack size={18} fill="currentColor"/>
-    </button>
-    <button
-      onClick={togglePlay}
-      className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-lg shadow-primary/20 active:scale-95 transition-all"
-    >
-      {isPlaying
-        ? <Pause size={18} fill="currentColor"/>
-        : <Play size={18} className="ml-0.5" fill="currentColor"/>}
-    </button>
-    <button onClick={skipForward} className="text-muted-foreground hover:text-primary transition-colors p-2">
-      <SkipForward size={18} fill="currentColor"/>
-    </button>
-    <button onClick={handleClose} className="text-muted-foreground hover:text-foreground transition-colors p-2">
-      <X size={18}/>
-    </button>
-  </div>
-  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary">
-    <div className="h-full bg-primary transition-all" style={{ width: `${progress}%` }}/>
-  </div>
-</div>
+          {/* ── MOBILE BAR ── */}
+          <div className="lg:hidden px-4 py-3 flex items-center gap-3">
+            <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary font-bold text-sm shrink-0">
+              {isSurahMode ? <Music size={18}/> : (ayahNumber || selectedSurah)}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-bold text-foreground truncate">
+                {isSurahMode
+                  ? `Full Surah — ${currentSurah?.name_complex}`
+                  : currentAyah ? `Ayah ${currentAyah}` : currentSurah?.name_complex}
+              </p>
+              <p className="text-[10px] text-muted-foreground uppercase tracking-widest truncate">
+                {currentSurah?.name_arabic}
+              </p>
+            </div>
+            <div className="flex items-center gap-1 shrink-0">
+              <button
+                onClick={playSurah}
+                className={`p-2 transition-colors ${
+                  isSurahMode ? "text-primary" : "text-muted-foreground hover:text-primary"
+                }`}
+              >
+                <Music size={18}/>
+              </button>
+              <button onClick={skipBack} className="text-muted-foreground hover:text-primary transition-colors p-2">
+                <SkipBack size={18} fill="currentColor"/>
+              </button>
+              <button
+                onClick={togglePlay}
+                className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-lg shadow-primary/20 active:scale-95 transition-all"
+              >
+                {isPlaying
+                  ? <Pause size={18} fill="currentColor"/>
+                  : <Play size={18} className="ml-0.5" fill="currentColor"/>}
+              </button>
+              <button onClick={skipForward} className="text-muted-foreground hover:text-primary transition-colors p-2">
+                <SkipForward size={18} fill="currentColor"/>
+              </button>
+              <button onClick={handleClose} className="text-muted-foreground hover:text-foreground transition-colors p-2">
+                <X size={18}/>
+              </button>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary">
+              <div className="h-full bg-primary transition-all" style={{ width: `${progress}%` }}/>
+            </div>
+          </div>
 
           {/* ── DESKTOP BAR ── */}
           <div className="hidden lg:block px-6 py-4">
@@ -302,13 +314,28 @@ export function AudioPlayer() {
             </div>
           </div>
 
+          {/* Step 2 — updated onEnded with auto-advance + scroll */}
           <audio
             ref={audioRef}
             onTimeUpdate={handleTimeUpdate}
             onEnded={() => {
-              setIsPlaying(false);
-              if (!isSurahMode) setCurrentAyah(null);
-              setIsAudioActive(false);
+              if (isSurahMode) {
+                setIsPlaying(false);
+                setIsAudioActive(false);
+                return;
+              }
+              if (ayahs && currentAyah) {
+                const idx = ayahs.findIndex(a => a.verse_key === currentAyah);
+                if (idx !== -1 && idx < ayahs.length - 1) {
+                  const nextVerse = ayahs[idx + 1].verse_key;
+                  setCurrentAyah(nextVerse);
+                  scrollToAyah(nextVerse);
+                } else {
+                  setIsPlaying(false);
+                  setCurrentAyah(null);
+                  setIsAudioActive(false);
+                }
+              }
             }}
           />
         </motion.div>
