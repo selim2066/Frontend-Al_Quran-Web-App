@@ -48,7 +48,8 @@ const SURAH_NAMES: Record<number, string> = {
 
 function LanternLeft() {
   return (
-    <svg width="60" height="140" viewBox="0 0 60 140" fill="none" className="absolute left-4 top-0 opacity-40 dark:opacity-20 pointer-events-none select-none">
+    <svg width="60" height="140" viewBox="0 0 60 140" fill="none"
+      className="absolute left-4 top-0 opacity-30 dark:opacity-25 pointer-events-none select-none z-10">
       <line x1="30" y1="0" x2="30" y2="30" stroke="#4caf50" strokeWidth="1.5"/>
       <ellipse cx="30" cy="32" rx="12" ry="5" fill="#4caf50"/>
       <path d="M16,36 Q10,70 16,104 L44,104 Q50,70 44,36 Z" fill="#81c784" stroke="#4caf50" strokeWidth="1"/>
@@ -58,14 +59,15 @@ function LanternLeft() {
       <ellipse cx="30" cy="104" rx="12" ry="5" fill="#4caf50"/>
       <line x1="30" y1="109" x2="30" y2="125" stroke="#4caf50" strokeWidth="1.2"/>
       <ellipse cx="30" cy="127" rx="4" ry="4" fill="#4caf50"/>
-      <ellipse cx="30" cy="70" rx="8" ry="10" fill="#fff9c4" opacity="0.4"/>
+      <ellipse cx="30" cy="70" rx="8" ry="10" fill="#fff9c4" opacity="0.5"/>
     </svg>
   );
 }
 
 function LanternRight() {
   return (
-    <svg width="50" height="115" viewBox="0 0 50 115" fill="none" className="absolute right-6 top-0 opacity-40 dark:opacity-20 pointer-events-none select-none">
+    <svg width="50" height="115" viewBox="0 0 50 115" fill="none"
+      className="absolute right-6 top-0 opacity-30 dark:opacity-25 pointer-events-none select-none z-10">
       <line x1="25" y1="0" x2="25" y2="24" stroke="#4caf50" strokeWidth="1.5"/>
       <ellipse cx="25" cy="26" rx="10" ry="4" fill="#4caf50"/>
       <path d="M13,30 Q8,58 13,84 L37,84 Q42,58 37,30 Z" fill="#81c784" stroke="#4caf50" strokeWidth="1"/>
@@ -75,7 +77,191 @@ function LanternRight() {
       <ellipse cx="25" cy="84" rx="10" ry="4" fill="#4caf50"/>
       <line x1="25" y1="88" x2="25" y2="100" stroke="#4caf50" strokeWidth="1.2"/>
       <ellipse cx="25" cy="102" rx="3" ry="3" fill="#4caf50"/>
-      <ellipse cx="25" cy="57" rx="6" ry="8" fill="#fff9c4" opacity="0.4"/>
+      <ellipse cx="25" cy="57" rx="6" ry="8" fill="#fff9c4" opacity="0.5"/>
+    </svg>
+  );
+}
+
+function MosqueBackground() {
+  return (
+    <svg
+      viewBox="0 0 1440 520"
+      preserveAspectRatio="xMidYMax slice"
+      xmlns="http://www.w3.org/2000/svg"
+      className="absolute bottom-0 left-0 w-full h-full pointer-events-none select-none"
+      aria-hidden="true"
+    >
+      {/* ── Sky gradient ── */}
+      <defs>
+        <radialGradient id="glowLight" cx="50%" cy="60%" r="55%">
+          <stop offset="0%" stopColor="#d1fae5" stopOpacity="0.9"/>
+          <stop offset="100%" stopColor="#f0fdf4" stopOpacity="0"/>
+        </radialGradient>
+        <radialGradient id="glowDark" cx="50%" cy="55%" r="50%">
+          <stop offset="0%" stopColor="#064e3b" stopOpacity="0.6"/>
+          <stop offset="100%" stopColor="#000000" stopOpacity="0"/>
+        </radialGradient>
+        {/* Islamic 8-point star pattern */}
+        <pattern id="islamicPattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+          <g opacity="0.07" fill="none" stroke="currentColor" strokeWidth="0.5">
+            <polygon points="30,5 35,22 52,22 39,32 44,49 30,39 16,49 21,32 8,22 25,22"/>
+            <circle cx="30" cy="30" r="12"/>
+          </g>
+        </pattern>
+      </defs>
+
+      {/* Pattern overlay */}
+      <rect width="1440" height="520" fill="url(#islamicPattern)" className="text-emerald-800 dark:text-emerald-300"/>
+
+      {/* Atmospheric glow — light mode */}
+      <ellipse cx="720" cy="380" rx="500" ry="200"
+        className="fill-emerald-200 dark:fill-transparent" opacity="0.35"/>
+
+      {/* ── Far background: hazy city horizon ── */}
+      <g opacity="0.12" className="fill-emerald-800 dark:fill-emerald-200">
+        {/* distant minarets */}
+        <rect x="60" y="300" width="8" height="120"/>
+        <polygon points="64,300 60,315 68,315"/>
+        <rect x="160" y="310" width="7" height="110"/>
+        <polygon points="163,310 159,324 167,324"/>
+        <rect x="1270" y="305" width="8" height="115"/>
+        <polygon points="1274,305 1270,319 1278,319"/>
+        <rect x="1370" y="298" width="7" height="122"/>
+        <polygon points="1373,298 1369,312 1377,312"/>
+        {/* distant domes */}
+        <ellipse cx="240" cy="340" rx="40" ry="20"/>
+        <ellipse cx="1200" cy="335" rx="40" ry="20"/>
+      </g>
+
+      {/* ── Mid layer: secondary mosque ── */}
+      <g opacity="0.22" className="fill-emerald-700 dark:fill-emerald-300">
+        {/* left minaret */}
+        <rect x="280" y="250" width="16" height="170"/>
+        <polygon points="288,250 280,275 296,275"/>
+        <ellipse cx="288" cy="248" rx="5" ry="8"/>
+        {/* right minaret */}
+        <rect x="1144" y="250" width="16" height="170"/>
+        <polygon points="1152,250 1144,275 1160,275"/>
+        <ellipse cx="1152" cy="248" rx="5" ry="8"/>
+        {/* main body */}
+        <rect x="310" y="320" width="820" height="100"/>
+        {/* central dome */}
+        <ellipse cx="720" cy="318" rx="110" ry="55"/>
+        <rect x="610" y="318" width="220" height="10"/>
+        {/* side domes */}
+        <ellipse cx="460" cy="338" rx="70" ry="35"/>
+        <rect x="390" y="338" width="140" height="8"/>
+        <ellipse cx="980" cy="338" rx="70" ry="35"/>
+        <rect x="910" y="338" width="140" height="8"/>
+        {/* arched windows */}
+        {[400,460,520,680,720,760,920,980,1040].map((x, i) => (
+          <g key={i}>
+            <rect x={x} y="350" width="22" height="40" rx="11"/>
+          </g>
+        ))}
+      </g>
+
+      {/* ── Front layer: main grand mosque ── */}
+      <g className="fill-emerald-900 dark:fill-emerald-950" opacity="0.85">
+
+        {/* Far-left minaret */}
+        <rect x="100" y="180" width="22" height="240"/>
+        <rect x="96" y="230" width="30" height="8" rx="2"/>
+        <rect x="96" y="290" width="30" height="8" rx="2"/>
+        <polygon points="111,180 100,212 122,212"/>
+        <ellipse cx="111" cy="176" rx="7" ry="11"/>
+        {/* crescent */}
+        <path d="M111,162 Q118,169 111,176 Q106,168 111,162Z" fill="#10b981" opacity="0.8"/>
+
+        {/* Far-right minaret */}
+        <rect x="1318" y="180" width="22" height="240"/>
+        <rect x="1314" y="230" width="30" height="8" rx="2"/>
+        <rect x="1314" y="290" width="30" height="8" rx="2"/>
+        <polygon points="1329,180 1318,212 1340,212"/>
+        <ellipse cx="1329" cy="176" rx="7" ry="11"/>
+        <path d="M1329,162 Q1336,169 1329,176 Q1324,168 1329,162Z" fill="#10b981" opacity="0.8"/>
+
+        {/* Inner-left minaret */}
+        <rect x="370" y="220" width="18" height="200"/>
+        <rect x="367" y="265" width="24" height="6" rx="2"/>
+        <rect x="367" y="315" width="24" height="6" rx="2"/>
+        <polygon points="379,220 370,248 388,248"/>
+        <ellipse cx="379" cy="217" rx="6" ry="9"/>
+        <path d="M379,205 Q385,211 379,217 Q374,210 379,205Z" fill="#10b981" opacity="0.8"/>
+
+        {/* Inner-right minaret */}
+        <rect x="1052" y="220" width="18" height="200"/>
+        <rect x="1049" y="265" width="24" height="6" rx="2"/>
+        <rect x="1049" y="315" width="24" height="6" rx="2"/>
+        <polygon points="1061,220 1052,248 1070,248"/>
+        <ellipse cx="1061" cy="217" rx="6" ry="9"/>
+        <path d="M1061,205 Q1067,211 1061,217 Q1056,210 1061,205Z" fill="#10b981" opacity="0.8"/>
+
+        {/* Main mosque body */}
+        <rect x="130" y="370" width="1180" height="150"/>
+
+        {/* Side wings */}
+        <rect x="130" y="340" width="260" height="30"/>
+        <rect x="1050" y="340" width="260" height="30"/>
+
+        {/* Left side dome */}
+        <path d="M200,340 Q270,285 340,340Z"/>
+        <rect x="200" y="336" width="140" height="6"/>
+
+        {/* Right side dome */}
+        <path d="M1100,340 Q1170,285 1240,340Z"/>
+        <rect x="1100" y="336" width="140" height="6"/>
+
+        {/* Central large dome */}
+        <path d="M540,370 Q720,240 900,370Z"/>
+        <rect x="540" y="364" width="360" height="8"/>
+        {/* dome ribbing */}
+        <line x1="720" y1="244" x2="620" y2="370" stroke="#059669" strokeWidth="0.8" opacity="0.4"/>
+        <line x1="720" y1="244" x2="660" y2="370" stroke="#059669" strokeWidth="0.8" opacity="0.4"/>
+        <line x1="720" y1="244" x2="700" y2="370" stroke="#059669" strokeWidth="0.8" opacity="0.4"/>
+        <line x1="720" y1="244" x2="740" y2="370" stroke="#059669" strokeWidth="0.8" opacity="0.4"/>
+        <line x1="720" y1="244" x2="780" y2="370" stroke="#059669" strokeWidth="0.8" opacity="0.4"/>
+        <line x1="720" y1="244" x2="820" y2="370" stroke="#059669" strokeWidth="0.8" opacity="0.4"/>
+        {/* dome finial */}
+        <line x1="720" y1="240" x2="720" y2="224" stroke="#10b981" strokeWidth="2"/>
+        <ellipse cx="720" cy="222" rx="5" ry="8"/>
+        <path d="M720,208 Q727,215 720,222 Q715,214 720,208Z" fill="#10b981" opacity="0.9"/>
+
+        {/* Arched gate - center */}
+        <rect x="680" y="400" width="80" height="120" rx="40 40 0 0"/>
+
+        {/* Arched windows row */}
+        {[160,220,280,440,500,920,980,1100,1160,1220].map((x, i) => (
+          <rect key={i} x={x} y="390" width="30" height="55" rx="15 15 0 0"/>
+        ))}
+        {/* Second row smaller windows */}
+        {[190,350,510,870,1030,1190].map((x, i) => (
+          <rect key={i} x={x} y="355" width="20" height="30" rx="10 10 0 0" opacity="0.6"/>
+        ))}
+
+        {/* Decorative horizontal band */}
+        <rect x="130" y="385" width="1180" height="4" opacity="0.4"/>
+        <rect x="130" y="350" width="1180" height="2" opacity="0.3"/>
+
+        {/* Courtyard wall extends to edges */}
+        <rect x="0" y="410" width="130" height="110"/>
+        <rect x="1310" y="410" width="130" height="110"/>
+      </g>
+
+      {/* ── Ground plane ── */}
+      <rect x="0" y="490" width="1440" height="30"
+        className="fill-emerald-900 dark:fill-emerald-950" opacity="0.9"/>
+
+      {/* ── Atmospheric overlay gradients ── */}
+      {/* Bottom fade to page bg */}
+      <rect x="0" y="380" width="1440" height="140"
+        fill="url(#fadeBottom)" opacity="1"/>
+      <defs>
+        <linearGradient id="fadeBottom" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="transparent"/>
+          <stop offset="100%" stopColor="white" className="[stop-color:white] dark:[stop-color:black]"/>
+        </linearGradient>
+      </defs>
     </svg>
   );
 }
@@ -96,7 +282,6 @@ export function HeroSection() {
     };
   };
 
-  // Load initial 3 slides
   useEffect(() => {
     const loadInitial = async () => {
       try {
@@ -113,7 +298,6 @@ export function HeroSection() {
     loadInitial();
   }, []);
 
-  // Auto-advance + fetch next random ayah in background
   useEffect(() => {
     if (slides.length === 0 || isPaused) return;
     intervalRef.current = setInterval(async () => {
@@ -131,30 +315,57 @@ export function HeroSection() {
   }, [slides.length, isPaused]);
 
   return (
-    <section className="relative w-full min-h-[600px] flex flex-col items-center justify-center pt-16 pb-28  bg-gradient-to-b from-green-50 to-white dark:from-background dark:to-background border-b border-border/10">
+    <section className="relative w-full min-h-[640px] flex flex-col items-center justify-center pt-16 pb-36 border-b border-emerald-100 dark:border-emerald-950 bg-gradient-to-b from-[#f0fdf4] via-[#ecfdf5] to-white dark:from-[#020c07] dark:via-[#021a0e] dark:to-[#000000]">
 
-      {/* Arabic bg watermark */}
-      <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.04] pointer-events-none select-none overflow-hidden">
-        <div className="absolute top-0 left-0 text-[18rem] font-serif -translate-x-1/3 -translate-y-1/3 text-green-900 dark:text-foreground">قرآن</div>
-        <div className="absolute bottom-0 right-0 text-[18rem] font-serif translate-x-1/3 translate-y-1/3 text-green-900 dark:text-foreground">مجيد</div>
+      {/* ── Layer 1: Islamic geometric pattern overlay ── */}
+      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-[0.03] dark:opacity-[0.06]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23059669' stroke-width='0.5'%3E%3Cpolygon points='40,4 46,22 65,22 51,33 56,51 40,41 24,51 29,33 15,22 34,22'/%3E%3Ccircle cx='40' cy='40' r='18'/%3E%3Crect x='22' y='22' width='36' height='36' transform='rotate(45 40 40)'/%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundRepeat: 'repeat',
+          }}
+        />
       </div>
 
-      {/* Lanterns */}
+      {/* ── Layer 2: Radial atmospheric glow ── */}
+      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
+        {/* Light mode: warm sunrise glow from center-bottom */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full bg-emerald-200/40 dark:bg-transparent blur-[120px]"/>
+        {/* Dark mode: deep moon glow */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full bg-transparent dark:bg-emerald-900/20 blur-[100px]"/>
+        {/* Top ambient */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] rounded-full bg-emerald-100/30 dark:bg-emerald-950/40 blur-[80px]"/>
+      </div>
+
+      {/* ── Layer 3: Grand mosque SVG illustration ── */}
+      <div className="absolute inset-0 pointer-events-none select-none">
+        <MosqueBackground />
+      </div>
+
+      {/* ── Layer 4: Lanterns (above mosque, below content) ── */}
       <LanternLeft />
       <LanternRight />
 
-      <div className="container mx-auto px-6 relative z-10 space-y-10">
+      {/* ── Layer 5: Content ── */}
+      <div className="container mx-auto px-6 relative z-20 space-y-10">
 
         {/* Main heading */}
-        <div className="text-center space-y-2">
-          <h1 className="text-5xl md:text-7xl font-serif font-bold tracking-[0.15em] text-green-900 dark:text-foreground uppercase">
+        <div className="text-center space-y-3">
+          <p className="text-[10px] font-bold tracking-[0.4em] uppercase text-emerald-600 dark:text-emerald-400">
+            ﷽
+          </p>
+          <h1 className="text-5xl md:text-7xl font-serif font-bold tracking-[0.15em] text-emerald-950 dark:text-white uppercase drop-shadow-sm">
             Quran Mazid
           </h1>
           <div className="flex items-center justify-center gap-3">
-            <div className="h-px w-16 bg-green-400 dark:bg-primary/40"/>
-            <div className="w-1.5 h-1.5 rounded-full bg-green-400 dark:bg-primary"/>
-            <div className="h-px w-16 bg-green-400 dark:bg-primary/40"/>
+            <div className="h-px w-20 bg-gradient-to-r from-transparent to-emerald-400 dark:to-emerald-600"/>
+            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"/>
+            <div className="h-px w-20 bg-gradient-to-l from-transparent to-emerald-400 dark:to-emerald-600"/>
           </div>
+          <p className="text-xs tracking-[0.25em] uppercase text-emerald-700/60 dark:text-emerald-400/50 font-medium">
+            Read · Study · Learn
+          </p>
         </div>
 
         {/* Ayah Slider */}
@@ -176,18 +387,16 @@ export function HeroSection() {
                 className="text-center space-y-3 max-w-3xl relative"
               >
                 {isPaused && (
-                  <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold uppercase tracking-widest text-green-600 dark:text-primary/60">
+                  <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400/60">
                     ⏸ paused
                   </span>
                 )}
-                <p className="text-base md:text-lg text-green-900/70 dark:text-muted-foreground font-medium italic leading-relaxed line-clamp-2">
+                <p className="text-base md:text-lg text-emerald-900/80 dark:text-emerald-100/70 font-medium italic leading-relaxed line-clamp-2 px-4">
                   "{slides[currentSlide].translation_text?.replace(/<[^>]*>?/gm, "") || ""}"
                 </p>
-                <p className="text-[11px] font-bold text-green-600 dark:text-primary uppercase tracking-[0.3em]">
+                <p className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-[0.3em]">
                   [ {slides[currentSlide].surahName} : {slides[currentSlide].verse_key?.split(":")[1]} ]
                 </p>
-
-                {/* Windowed dots */}
                 <div className="flex items-center justify-center gap-1.5 pt-1">
                   {[-2, -1, 0, 1, 2].map((offset) => {
                     const i = currentSlide + offset;
@@ -198,8 +407,8 @@ export function HeroSection() {
                         onClick={(e) => { e.stopPropagation(); setCurrentSlide(i); }}
                         className={`rounded-full transition-all ${
                           i === currentSlide
-                            ? "w-4 h-1.5 bg-green-500 dark:bg-primary"
-                            : "w-1.5 h-1.5 bg-green-300 dark:bg-primary/30"
+                            ? "w-4 h-1.5 bg-emerald-500"
+                            : "w-1.5 h-1.5 bg-emerald-300 dark:bg-emerald-700"
                         }`}
                       />
                     );
@@ -207,63 +416,29 @@ export function HeroSection() {
                 </div>
               </motion.div>
             ) : (
-              <div className="h-16 w-56 bg-green-100 dark:bg-primary/5 rounded-full animate-pulse" />
+              <div className="h-16 w-56 bg-emerald-100 dark:bg-emerald-900/20 rounded-full animate-pulse" />
             )}
           </AnimatePresence>
         </div>
 
         {/* Search & Quick Links */}
-        <div className="max-w-2xl mx-auto w-full space-y-6">
+        <div className="max-w-2xl mx-auto w-full space-y-5">
           <HeroSearch />
           <div className="flex flex-wrap items-center justify-center gap-2">
-            <span className="text-[10px] font-bold text-green-700/50 dark:text-muted-foreground uppercase tracking-widest mr-1">
-            
+            <span className="text-[10px] font-bold text-emerald-700/40 dark:text-emerald-500/40 uppercase tracking-widest mr-1">
+              Quick Links:
             </span>
             {QUICK_LINKS.map((link) => (
               <Link
                 key={link.id}
                 href={`/surah/${link.id}`}
-                className="px-4 py-1.5 bg-white dark:bg-secondary/50 hover:bg-green-500 dark:hover:bg-primary hover:text-white text-green-800 dark:text-foreground/70 text-xs font-bold rounded-full transition-all border border-green-200 dark:border-border/40 shadow-sm active:scale-95"
+                className="px-4 py-1.5 bg-white/70 dark:bg-emerald-950/60 backdrop-blur-sm hover:bg-emerald-500 dark:hover:bg-emerald-700 hover:text-white text-emerald-800 dark:text-emerald-300 text-xs font-bold rounded-full transition-all border border-emerald-200 dark:border-emerald-800/60 shadow-sm active:scale-95"
               >
                 {link.name}
               </Link>
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Mosque Silhouette */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none">
-        <svg width="100%" height="100%" viewBox="0 0 1440 160" preserveAspectRatio="none">
-          <path
-            d="M0,160 L0,120 L40,105 L80,120 L110,88 L140,120 L170,100
-               L200,80 L230,100 L255,82 L280,120
-               L320,82 L340,100 L360,78 L380,100 L400,120
-               L430,100 L460,78 L490,100 L520,120
-               L560,100 L590,75 L620,100 L650,88 L680,120
-               L720,88 L750,75 L780,100 L810,88 L840,120
-               L880,100 L910,78 L940,100 L970,120
-               L1000,100 L1030,82 L1060,100 L1080,120
-               L1110,100 L1140,80 L1170,100 L1200,88 L1230,120
-               L1260,100 L1300,88 L1330,120 L1360,105 L1400,120 L1440,160 Z"
-            className="fill-green-200 dark:fill-primary/10"
-            opacity="0.6"
-          />
-          <path
-            d="M0,160 L0,132 L50,118 L100,132 L130,108 L160,132 L200,115
-               L230,95 L260,115 L290,100 L310,132
-               L350,100 L380,118 L410,132
-               L450,115 L480,95 L510,115 L540,132
-               L580,115 L610,92 L640,115 L670,108 L700,132
-               L740,108 L770,92 L800,115 L830,108 L860,132
-               L900,115 L930,95 L960,115 L990,132
-               L1030,115 L1060,100 L1090,115 L1110,132
-               L1150,115 L1180,95 L1210,115 L1240,108 L1270,132
-               L1310,118 L1360,132 L1400,118 L1440,132 L1440,160 Z"
-            className="fill-green-300 dark:fill-primary/20"
-            opacity="0.4"
-          />
-        </svg>
       </div>
     </section>
   );
