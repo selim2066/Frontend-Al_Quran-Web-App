@@ -131,7 +131,7 @@ export function HeroSection() {
   }, [slides.length, isPaused]);
 
   return (
-    <section className="relative w-full min-h-[600px] flex flex-col items-center justify-center pt-20 pb-28  bg-gradient-to-b from-green-50 to-white dark:from-background dark:to-background border-b border-border/10">
+    <section className="relative w-full min-h-[600px] flex flex-col items-center justify-center pt-16 pb-28  bg-gradient-to-b from-green-50 to-white dark:from-background dark:to-background border-b border-border/10">
 
       {/* Arabic bg watermark */}
       <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.04] pointer-events-none select-none overflow-hidden">

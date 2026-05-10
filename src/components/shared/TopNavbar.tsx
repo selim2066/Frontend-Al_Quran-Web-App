@@ -309,7 +309,8 @@ export function TopNavbar({
   ];
 
   return (
-    <header className="sticky py-1 top-0 z-40 w-full bg-green-50/80 dark:bg-background/80 backdrop-blur-md border-b border-green-100/60 dark:border-border/10">      <div className="container max-w-7xl mx-auto h-16 flex items-center justify-between px-4">
+    <header className="sticky py-1 top-0 z-40 w-full bg-green-50/80 dark:bg-background/80 backdrop-blur-md border-b border-green-100/60 dark:border-border/10">    
+      <div className="container max-w-7xl mx-auto h-16 flex items-center justify-between px-0">
         {/* Mobile Reading View: Hamburger left, Title center, Icons right */}
         {isReadingView && (
           <div className="flex md:hidden items-center justify-between w-full">
@@ -361,8 +362,8 @@ export function TopNavbar({
         >
           {/* Logo and Title */}
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary shadow-lg shadow-primary/20">
-              <BookOpen className="h-7 w-7 text-white" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary shadow-lg shadow-primary/20">
+              <BookOpen className="h-6 w-6 text-white" />
             </div>
             <div className="hidden sm:block">
               <h1 className="text-xl font-bold font-serif tracking-tight text-foreground">
